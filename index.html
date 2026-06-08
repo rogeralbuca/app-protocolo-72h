@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO Meta Tags -->
+  <title>Checklist de Preparação Familiar | Protocolo 72H</title>
+  <meta name="description"
+    content="Prepare sua família de forma gradual para sobreviver a qualquer colapso urbano. Um plano prático de 72 horas para água, alimentação, energia, segurança e evasão.">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Checklist de Preparação Familiar | Protocolo 72H">
+  <meta property="og:description"
+    content="Prepare sua família de forma gradual para sobreviver a qualquer colapso urbano. Plano prático de 72 horas.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://protocolo72h.blog.br/">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap"
+    rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="tactical-theme">
+  <!-- Decorative Grid Overlay -->
+  <div class="grid-overlay"></div>
+
+  <!-- App Wrapper -->
+  <div class="app-container">
+
+    <!-- Tactical Status Dashboard -->
+    <div class="status-card progress-card">
+      <div class="card-header-tactical">
+        <span class="card-title">STATUS DA PREPARAÇÃO</span>
+        <span class="operation-code" id="operation-code">OPERANDO: 0%</span>
+      </div>
+      <div class="progress-container-tactical">
+        <div class="progress-bar-glow" id="progress-bar-glow" style="width: 0%;"></div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-box" id="card-completed" role="button" tabindex="0" aria-label="Filtrar por itens concluídos">
+          <span class="stat-label">CONCLUÍDO</span>
+          <span class="stat-value number-mono" id="stat-completed">00</span>
+        </div>
+        <div class="stat-box" id="card-remaining" role="button" tabindex="0" aria-label="Filtrar por itens faltantes">
+          <span class="stat-label">FALTAM</span>
+          <span class="stat-value number-mono warning-text" id="stat-remaining">00</span>
+        </div>
+        <div class="stat-box active" id="card-total" role="button" tabindex="0" aria-label="Mostrar todos os itens">
+          <span class="stat-label">TOTAL</span>
+          <span class="stat-value number-mono" id="stat-total">00</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Top Alert Banner (Urgency) -->
+    <div class="urgency-banner" id="urgency-banner">
+      <div class="banner-content">
+        <span class="banner-text"><strong>URGENTE:</strong> A crise não avisa quando vai chegar. Prepare sua família
+          hoje antes que o sistema entre em colapso.</span>
+      </div>
+    </div>
+
+    <!-- Main Layout Grid -->
+    <div class="main-layout">
+      <!-- Sidebar Navigation for Pillars (Tabs) -->
+      <nav class="pillars-navigation" aria-label="Pilares do Protocolo">
+        <ul id="pillars-tab-list">
+          <!-- Dynamic injected tabs -->
+        </ul>
+      </nav>
+
+      <!-- Active Content Panel -->
+      <main class="content-panel" aria-label="Lista de Itens do Checklist">
+        <div class="pillar-header-card" id="pillar-header-card">
+          <div class="pillar-title-wrapper">
+            <div class="pillar-icon-container" id="pillar-active-icon">
+              <!-- Injected SVG -->
+            </div>
+            <div>
+              <h2 class="pillar-title" id="pillar-active-title">Pilar 1: Água</h2>
+              <p class="pillar-description" id="pillar-active-desc">Sem água, o plano falha nas primeiras 24 horas.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Checklist Items List -->
+        <div class="checklist-wrapper" id="checklist-items-wrapper" role="list">
+          <!-- Dynamic items injected here -->
+        </div>
+
+        <!-- Bottom Action Controls -->
+        <div class="bottom-actions">
+          <button class="action-secondary-btn" id="btn-reset-checklist">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67" />
+            </svg>
+            Reiniciar Preparação
+          </button>
+          <div class="navigation-buttons">
+            <button class="action-secondary-btn" id="btn-prev-pillar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+              Anterior
+            </button>
+            <button class="action-secondary-btn" id="btn-next-pillar">
+              Próximo
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </main>
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="checklist-data.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>
