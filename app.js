@@ -92,6 +92,12 @@ class ProtocoloApp {
     // Navigation buttons
     this.btnPrevPillar.addEventListener("click", () => this.navigatePillar(-1));
     this.btnNextPillar.addEventListener("click", () => this.navigatePillar(1));
+
+    // Print button
+    const btnPrint = document.getElementById("btn-print-checklist");
+    if (btnPrint) {
+      btnPrint.addEventListener("click", () => this.printChecklist());
+    }
   }
 
   setStatusFilter(filter) {
@@ -369,13 +375,68 @@ class ProtocoloApp {
 
   // Reset checklist progress
   resetChecklist() {
-    const confirmReset = confirm("AVISO TÁTICO:\nDeseja reiniciar todos os registros de preparação familiar? Isso apagará seu progresso salvo localmente.");
+    const confirmReset = confirm("AVISO TÁTICO:\nDeseja reiniciar todos os registros de preparação familiar? Isso apagará seu progresso salvo localmente no navegador.");
     if (confirmReset) {
       this.checkedItems.clear();
       this.saveProgress();
-      this.setStatusFilter("pending");
+      this.setStatusFilter("all");
       this.updateStats();
     }
+  }
+
+  // Generates and prints the complete checklist (all pillars and items)
+  printChecklist() {
+    // 1. Get or create the container for printing
+    let printContainer = document.getElementById("print-section");
+    if (!printContainer) {
+      printContainer = document.createElement("div");
+      printContainer.id = "print-section";
+      document.body.appendChild(printContainer);
+    }
+
+    // 2. Build the HTML content of all pillars and items
+    let html = `
+      <div class="print-header">
+        <h1>PROTOCOLO 72H</h1>
+        <h2>Plano de Preparação Familiar Tático</h2>
+        <p>Este documento contém o checklist completo para sobrevivência de sua família nas primeiras 72 horas de um colapso urbano. Preencha-o e mantenha-o em local físico e seguro.</p>
+      </div>
+    `;
+
+    this.data.forEach((pillar) => {
+      html += `
+        <div class="print-pillar">
+          <h3>${pillar.pillar}</h3>
+          <p class="print-pillar-desc">${pillar.description}</p>
+          <div class="print-items-list">
+      `;
+
+      pillar.items.forEach((item) => {
+        const isChecked = this.checkedItems.has(item.id);
+        html += `
+          <div class="print-item">
+            <span class="print-checkbox ${isChecked ? 'checked' : ''}"></span>
+            <div class="print-item-content">
+              <span class="print-item-text">${item.text}</span>
+              ${item.tip ? `<span class="print-item-tip"><strong>Instrução Tática:</strong> ${item.tip}</span>` : ''}
+            </div>
+          </div>
+        `;
+      });
+
+      html += `
+          </div>
+        </div>
+      `;
+    });
+
+    printContainer.innerHTML = html;
+
+    // 3. Give the browser a brief moment (150ms) to reflow, paint and load fonts for the new DOM elements
+    setTimeout(() => {
+      // 4. Call print dialog. Since the element remains in the DOM, Chrome's print writer has unlimited time to render.
+      window.print();
+    }, 150);
   }
 }
 

@@ -439,6 +439,7 @@ body {
 /* Sidebar Navigation */
 .pillars-navigation {
   display: block;
+  min-width: 0;
 }
 
 .pillars-navigation ul {
@@ -449,6 +450,7 @@ body {
   gap: 0.5rem;
   padding-bottom: 0.5rem;
   scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
 }
 
 @media (min-width: 992px) {
@@ -476,6 +478,7 @@ body {
   text-align: left;
   transition: var(--transition-smooth);
   width: auto;
+  white-space: nowrap;
 }
 
 @media (min-width: 992px) {
@@ -570,6 +573,7 @@ body {
   padding: 1.25rem;
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 @media (min-width: 768px) {
@@ -658,7 +662,7 @@ body {
 .checkbox-custom {
   width: 1.25rem;
   height: 1.25rem;
-  border: 2px solid var(--border-color);
+  border: 1px solid var(--text-secondary);
   border-radius: 4px;
   display: flex;
   align-items: center;
@@ -739,7 +743,7 @@ body {
   border: 1px solid var(--border-color);
   color: var(--text-secondary);
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   padding: 0.6rem 1rem;
   border-radius: 6px;
   cursor: pointer;
@@ -764,35 +768,45 @@ body {
 .app-footer {
   text-align: center;
   padding: 2rem 0;
-  margin-top: auto;
+  margin-top: 2.5rem;
   border-top: 1px solid var(--border-color);
 }
 
-.footer-links {
+.footer-alert {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(217, 93, 30, 0.04);
+  border: 1px solid rgba(217, 93, 30, 0.2);
+  border-radius: 6px;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.footer-alert .alert-icon {
+  color: var(--color-orange-bright);
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+}
+
+.footer-alert .alert-text {
+  font-size: 0.8rem;
+  color: #fce7db;
+  line-height: 1.5;
+}
+
+.footer-actions {
   display: flex;
   justify-content: center;
-  gap: 1rem;
-  font-size: 0.8rem;
-  margin-bottom: 0.5rem;
-}
-
-.footer-links a {
-  color: var(--text-secondary);
-  text-decoration: none;
-  transition: var(--transition-smooth);
-}
-
-.footer-links a:hover {
-  color: var(--color-green-glow);
-}
-
-.separator {
-  color: var(--border-color);
+  margin-bottom: 1.5rem;
 }
 
 .copyright-info {
   font-size: 0.7rem;
   color: var(--text-muted);
+  font-family: var(--font-mono);
 }
 
 /* Animations */
@@ -827,4 +841,252 @@ body {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--border-active);
+}
+
+/* ==========================================================================
+   Responsive Adaptations - Mobile & Tablet
+   ========================================================================== */
+
+/* Tablet & Mobile layout adjustments */
+@media (max-width: 768px) {
+  .app-container {
+    padding: 0 1rem 1.5rem;
+  }
+}
+
+/* Bottom Actions stacking */
+@media (max-width: 600px) {
+  .bottom-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+  
+  .navigation-buttons {
+    width: 100%;
+  }
+  
+  .navigation-buttons button {
+    flex: 1;
+    justify-content: center;
+  }
+  
+  .action-secondary-btn {
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+/* Small screen optimization (e.g. mobile portrait) */
+@media (max-width: 480px) {
+  /* Status Dashboard adjustments */
+  .status-card {
+    padding: 1rem;
+  }
+  
+  .stats-grid {
+    gap: 0.5rem;
+  }
+  
+  .stat-box {
+    padding: 0.5rem 0.25rem;
+  }
+  
+  .stat-label {
+    font-size: 0.55rem;
+  }
+  
+  .stat-value {
+    font-size: 1.25rem;
+  }
+  
+  /* Pillar Title adaptations */
+  .pillar-title-wrapper {
+    gap: 0.75rem;
+  }
+  
+  .pillar-icon-container {
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 6px;
+  }
+  
+  .pillar-icon-container svg {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+  
+  .pillar-title {
+    font-size: 1.1rem;
+  }
+  
+  .pillar-description {
+    font-size: 0.8rem;
+  }
+  
+  /* Checklist item adaptations */
+  .checklist-item {
+    padding: 0.85rem;
+    gap: 0.75rem;
+  }
+  
+  .item-text {
+    font-size: 0.875rem;
+  }
+  
+  .item-tip {
+    font-size: 0.75rem;
+    margin-top: 0.35rem;
+    padding: 0.3rem 0.5rem;
+  }
+  
+  /* Urgency Banner adaptation */
+  .urgency-banner {
+    padding: 0.6rem 1rem;
+    margin-top: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  
+  .banner-text {
+    font-size: 0.8rem;
+  }
+}
+
+/* Hide print section in screen view */
+@media screen {
+  #print-section {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   Print Stylesheet - Optimized for Hardcopy & PDF Saving
+   ========================================================================== */
+@media print {
+  /* Force white background and black text on body/html */
+  html, body {
+    background: #fff !important;
+    background-color: #fff !important;
+    color: #000 !important;
+  }
+
+  /* Completely remove interactive app elements from print layout */
+  .grid-overlay, .app-container {
+    display: none !important;
+  }
+
+  /* Format print-only section */
+  #print-section {
+    display: block !important;
+    width: 100%;
+    color: #000 !important;
+    background: #fff !important;
+    font-family: var(--font-sans);
+    padding: 20px;
+  }
+
+  .print-header {
+    text-align: center;
+    border-bottom: 2px double #000;
+    padding-bottom: 12px;
+    margin-bottom: 24px;
+  }
+
+  .print-header h1 {
+    font-size: 24pt;
+    font-weight: 800;
+    margin: 0;
+    letter-spacing: 2px;
+  }
+
+  .print-header h2 {
+    font-size: 14pt;
+    font-weight: 600;
+    margin: 5px 0 0 0;
+    color: #444;
+  }
+
+  .print-header p {
+    font-size: 10pt;
+    margin: 10px 0 0 0;
+    color: #666;
+  }
+
+  .print-pillar {
+    page-break-inside: avoid;
+    margin-bottom: 24px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 12px;
+  }
+
+  .print-pillar h3 {
+    font-size: 13pt;
+    font-weight: 700;
+    margin: 0 0 4px 0;
+    text-transform: uppercase;
+    color: #111;
+  }
+
+  .print-pillar-desc {
+    font-size: 9.5pt;
+    font-style: italic;
+    color: #555;
+    margin: 0 0 12px 0;
+  }
+
+  .print-items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .print-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 6px;
+    font-size: 9.5pt;
+  }
+
+  .print-checkbox {
+    width: 13pt;
+    height: 13pt;
+    border: 1.5px solid #000;
+    border-radius: 2px;
+    margin-right: 12px;
+    display: inline-block;
+    flex-shrink: 0;
+    position: relative;
+    background: #fff;
+  }
+
+  .print-checkbox.checked::after {
+    content: "X";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 900;
+    font-family: var(--font-sans);
+    font-size: 10pt;
+    color: #000;
+  }
+
+  .print-item-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .print-item-text {
+    font-weight: 500;
+    color: #000;
+  }
+
+  .print-item-tip {
+    font-size: 8.5pt;
+    color: #444;
+    margin-top: 2px;
+    border-left: 2px solid #888;
+    padding-left: 6px;
+  }
 }
